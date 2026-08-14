@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#6c5ce7">
     <meta name="description" content="Toko barang bekas berkualitas, harga bersahabat">
-    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
+
     <!-- HEADER -->
-    <header class="header" id="header">
+    <header class="header">
         <div class="header-content">
             <div class="logo-area">
                 <img id="logoImg" src="" alt="Logo" class="logo-img" style="display:none;">
@@ -22,9 +22,9 @@
                 </div>
             </div>
             <div class="header-actions">
-                <button class="btn-icon" id="btnSearch" title="Cari">🔍</button>
-                <button class="btn-icon" id="btnCart" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></button>
-                <button class="btn-icon" id="btnAdmin" title="Admin">⚙️</button>
+                <button class="btn-icon" id="btnSearch">🔍</button>
+                <button class="btn-icon" id="btnCart">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+                <button class="btn-icon" id="btnAdmin">⚙️</button>
             </div>
         </div>
     </header>
@@ -35,8 +35,8 @@
         <button class="btn-close-search" id="btnCloseSearch">✕</button>
     </div>
 
-    <!-- KATEGORI FILTER -->
-    <div class="category-filter" id="categoryFilter">
+    <!-- CATEGORY FILTER -->
+    <div class="category-filter">
         <button class="cat-btn active" data-cat="semua">Semua</button>
         <button class="cat-btn" data-cat="elektronik">📱 Elektronik</button>
         <button class="cat-btn" data-cat="fashion">👕 Fashion</button>
@@ -46,41 +46,20 @@
         <button class="cat-btn" data-cat="lainnya">📦 Lainnya</button>
     </div>
 
-    <!-- BANNER PROMO -->
-    <div class="promo-banner" id="promoBanner">
-        <div class="promo-slide active">
-            <span class="promo-icon">🔥</span>
-            <span>Barang bekas berkualitas, harga bersahabat!</span>
-        </div>
-        <div class="promo-slide">
-            <span class="promo-icon">💰</span>
-            <span>Hemat hingga 70% dari harga baru!</span>
-        </div>
-        <div class="promo-slide">
-            <span class="promo-icon">♻️</span>
-            <span>Beli bekas = ramah lingkungan!</span>
-        </div>
+    <!-- PROMO BANNER -->
+    <div class="promo-banner">
+        <div class="promo-slide active"><span class="promo-icon">🔥</span><span>Barang bekas berkualitas, harga bersahabat!</span></div>
+        <div class="promo-slide"><span class="promo-icon">💰</span><span>Hemat hingga 70% dari harga baru!</span></div>
+        <div class="promo-slide"><span class="promo-icon">♻️</span><span>Beli bekas = ramah lingkungan!</span></div>
     </div>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- STATS -->
-        <div class="stats-bar" id="statsBar">
-            <div class="stat-item">
-                <span class="stat-num" id="totalItems">0</span>
-                <span class="stat-label">Barang</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num" id="totalCategories">0</span>
-                <span class="stat-label">Kategori</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num" id="priceRange">-</span>
-                <span class="stat-label">Harga Mulai</span>
-            </div>
+        <div class="stats-bar">
+            <div class="stat-item"><span class="stat-num" id="totalItems">0</span><span class="stat-label">Barang</span></div>
+            <div class="stat-item"><span class="stat-num" id="totalCategories">0</span><span class="stat-label">Kategori</span></div>
+            <div class="stat-item"><span class="stat-num" id="priceRange">-</span><span class="stat-label">Harga Mulai</span></div>
         </div>
-
-        <!-- SORT -->
         <div class="sort-bar">
             <span class="sort-label">Urutkan:</span>
             <select id="sortSelect">
@@ -90,11 +69,7 @@
                 <option value="nama">Nama A-Z</option>
             </select>
         </div>
-
-        <!-- PRODUCT GRID -->
         <div class="product-grid" id="productGrid"></div>
-
-        <!-- EMPTY STATE -->
         <div class="empty-state" id="emptyState" style="display:none;">
             <span class="empty-icon">📦</span>
             <h3>Belum ada barang</h3>
@@ -111,10 +86,7 @@
         </div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cartTotal">Rp 0</span>
-            </div>
+            <div class="cart-total"><span>Total:</span><span id="cartTotal">Rp 0</span></div>
             <button class="btn-checkout" id="btnCheckout">💬 Checkout via WhatsApp</button>
             <button class="btn-clear-cart" id="btnClearCart">🗑️ Kosongkan Keranjang</button>
         </div>
@@ -128,18 +100,13 @@
             <button class="btn-close-admin" id="btnCloseAdmin">✕</button>
         </div>
         <div class="admin-body">
-            <!-- LOGIN -->
             <div id="adminLogin">
                 <h3>🔐 Login Admin</h3>
                 <input type="password" id="adminPassword" placeholder="Masukkan password admin">
                 <button class="btn-login" id="btnLogin">Masuk</button>
                 <p class="login-hint">Default: admin123</p>
             </div>
-
-            <!-- ADMIN CONTENT -->
             <div id="adminContent" style="display:none;">
-
-                <!-- STORE SETTINGS -->
                 <div class="admin-section">
                     <h3>🏪 Pengaturan Toko</h3>
                     <label>Nama Toko</label>
@@ -152,11 +119,9 @@
                     <input type="password" id="settingPassword" placeholder="Kosongkan jika tidak diubah">
                     <label>🖼️ Logo Toko</label>
                     <input type="file" id="settingLogo" accept="image/*">
-                    <img id="logoPreview" src="" alt="" style="display:none; max-width:100px; margin-top:8px; border-radius:8px;">
+                    <img id="logoPreview" src="" alt="" style="display:none;max-width:100px;margin-top:8px;border-radius:8px;">
                     <button class="btn-save-settings" id="btnSaveSettings">✅ Simpan Pengaturan</button>
                 </div>
-
-                <!-- ADD PRODUCT -->
                 <div class="admin-section">
                     <h3>➕ Tambah Barang Baru</h3>
                     <label>Nama Barang</label>
@@ -183,30 +148,21 @@
                     <textarea id="prodDesc" rows="3" placeholder="Deskripsi singkat barang..."></textarea>
                     <label>📷 Foto Barang</label>
                     <input type="file" id="prodImage" accept="image/*">
-                    <img id="imagePreview" src="" alt="" style="display:none; max-width:150px; margin-top:8px; border-radius:8px;">
+                    <img id="imagePreview" src="" alt="" style="display:none;max-width:150px;margin-top:8px;border-radius:8px;">
                     <button class="btn-add-product" id="btnAddProduct">➕ Tambah Barang</button>
                 </div>
-
-                <!-- MANAGE PRODUCTS -->
                 <div class="admin-section">
                     <h3>📋 Kelola Barang (<span id="adminItemCount">0</span>)</h3>
                     <div id="adminProductList"></div>
                 </div>
-
-                <!-- BACKUP & RESTORE -->
                 <div class="admin-section" style="border:2px solid #00b894;">
-                    <h3>💾 Backup & Restore Data</h3>
-                    <p style="font-size:12px;color:#636e72;margin-bottom:12px;line-height:1.5;">
-                        ⚠️ Data tersimpan di browser ini saja. Jika ganti HP/browser atau clear data, semua hilang.<br>
-                        ✅ Download backup secara rutin supaya data aman!
-                    </p>
+                    <h3>💾 Backup &amp; Restore Data</h3>
+                    <p style="font-size:12px;color:#636e72;margin-bottom:12px;line-height:1.5;">⚠️ Data tersimpan di browser ini saja. Download backup supaya data aman!</p>
                     <button class="btn-save-settings" id="btnExportData" style="background:linear-gradient(135deg,#00b894,#00a381);margin-top:0;">📥 Download Backup (.json)</button>
                     <label style="margin-top:14px;">📤 Restore dari File Backup</label>
                     <input type="file" id="importFile" accept=".json" style="margin-top:4px;padding:8px;font-size:13px;">
                     <button class="btn-save-settings" id="btnImportData" style="background:linear-gradient(135deg,#0984e3,#0770c2);">📤 Restore Data</button>
                 </div>
-
-                <!-- DANGER ZONE -->
                 <div class="admin-section danger-zone">
                     <h3>⚠️ Zona Berbahaya</h3>
                     <button class="btn-danger" id="btnResetAll">🗑️ Hapus Semua Data</button>
@@ -230,17 +186,17 @@
             </div>
             <p class="modal-desc" id="modalDesc"></p>
             <div class="modal-date" id="modalDate"></div>
-            <button class="btn-add-cart" id="btnAddCart">🛒 Tambah ke Keranjang</button>
+            <button class="btn-add-cart" id="btnAddCartModal">🛒 Tambah ke Keranjang</button>
             <button class="btn-wa-direct" id="btnWADirect">💬 Tanya via WhatsApp</button>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
+    <!-- TOAST -->
     <div class="toast" id="toast"></div>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p>© 2025 Adi Store — Barang Bekas Berkualitas 💜</p>
+        <p>&copy; 2025 Adi Store — Barang Bekas Berkualitas 💜</p>
     </footer>
 
     <script src="app.js"></script>
