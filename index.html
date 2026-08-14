@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Bekas Premium</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" class="modal-overlay active" style="background:var(--bg);z-index:999;">
+  <div class="modal-content login-modal">
+    <div class="login-icon">🏪</div>
+    <h2>Toko Bekas Premium</h2>
+    <p class="login-sub">Pilih mode akses</p>
+    <button class="btn-primary btn-viewer" onclick="enterAsViewer()">👁️ Mode Pembeli</button>
+    <div class="login-divider"><span>atau</span></div>
+    <div class="login-admin-row">
+      <input type="password" id="adminPass" placeholder="Password admin" onkeydown="if(event.key==='Enter')enterAsAdmin()">
+      <button class="btn-admin-login" onclick="enterAsAdmin()">🔓</button>
+    </div>
+    <p id="loginError" class="login-error">Password salah!</p>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="storeHeader">
+  <div class="header-content">
+    <div class="logo-wrap admin-only" id="logoWrap" onclick="document.getElementById('logoInput').click()">
+      <img id="storeLogo" src="" alt="Logo" class="store-logo" style="display:none;">
+      <span id="logoPlaceholder" class="logo-placeholder">📷</span>
+    </div>
+    <div class="logo-wrap viewer-logo" id="viewerLogoWrap" style="display:none;">
+      <img id="viewerLogo" src="" alt="Logo" class="store-logo" style="display:none;">
+      <span id="viewerLogoPlaceholder" class="logo-placeholder">🏪</span>
+    </div>
+    <div class="header-text">
+      <h1 id="storeName">Toko Bekas Premium</h1>
+      <p id="storeTagline">Barang bekas berkualitas, harga bersahabat</p>
+    </div>
+    <button class="btn-icon btn-edit-header admin-only" onclick="openHeaderModal()" title="Edit Header">✏️</button>
+  </div>
+  <input type="file" id="logoInput" accept="image/*" style="display:none;">
+</header>
+
+<!-- ===== TOOLBAR (Search + Actions) ===== -->
+<div class="toolbar">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Cari barang..." oninput="renderProducts()">
+  </div>
+  <div class="toolbar-actions admin-only">
+    <button class="btn-tool" onclick="exportData()" title="Export Data">📤</button>
+    <button class="btn-tool" onclick="document.getElementById('importFile').click()" title="Import Data">📥</button>
+    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(this)">
+    <button class="btn-tool btn-logout" onclick="logout()" title="Logout">🚪</button>
+  </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<div class="stats-row admin-only">
+  <div class="stat-card">
+    <span class="stat-num" id="totalItems">0</span>
+    <span class="stat-label">Total Barang</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num" id="totalValue">Rp 0</span>
+    <span class="stat-label">Total Nilai</span>
+  </div>
+</div>
+
+<!-- ===== FORM TAMBAH / EDIT (Admin Only) ===== -->
+<div class="form-section admin-only">
+  <div class="form-header">
+    <h2 id="formTitle">➕ Tambah Barang</h2>
+    <button class="btn-toggle-form" id="btnToggleForm" onclick="toggleForm()">▼</button>
+  </div>
+  <form id="productForm" class="product-form">
+    <input type="hidden" id="editId" value="">
+    <div class="photo-upload-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
+      <img id="photoPreview" src="" alt="Preview" style="display:none;">
+      <div id="photoPlaceholder" class="photo-placeholder">
+        <span>📸</span>
+        <p>Tap untuk upload foto barang</p>
+      </div>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" style="display:none;">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nama Barang</label>
+        <input type="text" id="namaBarang" placeholder="Contoh: Sepatu Nike Bekas" required>
+      </div>
+      <div class="form-group">
+        <label>Harga (Rp)</label>
+        <input type="number" id="harga" placeholder="150000" required>
+      </div>
+      <div class="form-group">
+        <label>Kondisi</label>
+        <select id="kondisi">
+          <option value="Seperti Baru">✨ Seperti Baru</option>
+          <option value="Layak Pakai">👍 Layak Pakai</option>
+          <option value="Ada Lecet">⚠️ Ada Lecet</option>
+          <option value="Perlu Perbaikan">🔧 Perlu Perbaikan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <select id="kategori">
+          <option value="Elektronik">Elektronik</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Buku">Buku</option>
+          <option value="Mainan">Mainan</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Deskripsi</label>
+      <textarea id="deskripsi" rows="3" placeholder="Jelaskan kondisi, kelengkapan, alasan jual..."></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" id="btnSimpan">💾 Simpan Barang</button>
+      <button type="button" class="btn-cancel" id="btnBatal" style="display:none;" onclick="resetForm()">✖ Batal</button>
+    </div>
+  </form>
+</div>
+
+<!-- ===== DAFTAR BARANG ===== -->
+<div class="products-section">
+  <h2 class="section-title">🏷️ Barang Dijual</h2>
+  <div class="products-grid" id="daftarBarang"></div>
+</div>
+
+<!-- ===== MODAL EDIT HEADER ===== -->
+<div class="modal-overlay" id="headerModal">
+  <div class="modal-content">
+    <h2>🎨 Edit Header Toko</h2>
+    <div class="form-group">
+      <label>Nama Toko</label>
+      <input type="text" id="inputStoreName" placeholder="Nama toko Anda">
+    </div>
+    <div class="form-group">
+      <label>Tagline</label>
+      <input type="text" id="inputTagline" placeholder="Slogan toko">
+    </div>
+    <div class="form-group">
+      <label>Nomor WhatsApp (untuk pembeli)</label>
+      <input type="tel" id="inputWA" placeholder="628xxxxxxxxxx">
+    </div>
+    <div class="form-group">
+      <label>Password Admin Baru</label>
+      <input type="password" id="inputNewPass" placeholder="Kosongkan jika tidak diubah">
+    </div>
+    <div class="form-group">
+      <label>Warna Header</label>
+      <div class="color-options">
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#6c5ce7,#a29bfe)" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)"></button>
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#00b894,#00cec9)" style="background:linear-gradient(135deg,#00b894,#00cec9)"></button>
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#e17055,#fdcb6e)" style="background:linear-gradient(135deg,#e17055,#fdcb6e)"></button>
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#0984e3,#74b9ff)" style="background:linear-gradient(135deg,#0984e3,#74b9ff)"></button>
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#2d3436,#636e72)" style="background:linear-gradient(135deg,#2d3436,#636e72)"></button>
+        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#e84393,#fd79a8)" style="background:linear-gradient(135deg,#e84393,#fd79a8)"></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn-secondary" onclick="document.getElementById('logoInput').click()">📷 Ganti Logo</button>
+      <button type="button" class="btn-secondary btn-remove-logo" onclick="removeLogo()">🗑️ Hapus Logo</button>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="btn-primary" onclick="saveHeader()">✅ Simpan</button>
+      <button type="button" class="btn-cancel" onclick="closeModal('headerModal')">✖ Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL DETAIL BARANG ===== -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-content modal-detail">
+    <button class="btn-close-modal" onclick="closeModal('detailModal')">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<!-- ===== TOAST NOTIFICATION ===== -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
