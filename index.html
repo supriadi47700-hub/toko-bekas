@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adi Store - Toko Bekas Premium</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <meta name="description" content="Toko barang bekas berkualitas, harga bersahabat">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -93,9 +92,7 @@
         </div>
 
         <!-- PRODUCT GRID -->
-        <div class="product-grid" id="productGrid">
-            <!-- Products will be rendered here -->
-        </div>
+        <div class="product-grid" id="productGrid"></div>
 
         <!-- EMPTY STATE -->
         <div class="empty-state" id="emptyState" style="display:none;">
@@ -139,8 +136,9 @@
                 <p class="login-hint">Default: admin123</p>
             </div>
 
-            <!-- ADMIN CONTENT (hidden until logged in) -->
+            <!-- ADMIN CONTENT -->
             <div id="adminContent" style="display:none;">
+
                 <!-- STORE SETTINGS -->
                 <div class="admin-section">
                     <h3>🏪 Pengaturan Toko</h3>
@@ -193,6 +191,19 @@
                 <div class="admin-section">
                     <h3>📋 Kelola Barang (<span id="adminItemCount">0</span>)</h3>
                     <div id="adminProductList"></div>
+                </div>
+
+                <!-- BACKUP & RESTORE -->
+                <div class="admin-section" style="border:2px solid #00b894;">
+                    <h3>💾 Backup & Restore Data</h3>
+                    <p style="font-size:12px;color:#636e72;margin-bottom:12px;line-height:1.5;">
+                        ⚠️ Data tersimpan di browser ini saja. Jika ganti HP/browser atau clear data, semua hilang.<br>
+                        ✅ Download backup secara rutin supaya data aman!
+                    </p>
+                    <button class="btn-save-settings" id="btnExportData" style="background:linear-gradient(135deg,#00b894,#00a381);margin-top:0;">📥 Download Backup (.json)</button>
+                    <label style="margin-top:14px;">📤 Restore dari File Backup</label>
+                    <input type="file" id="importFile" accept=".json" style="margin-top:4px;padding:8px;font-size:13px;">
+                    <button class="btn-save-settings" id="btnImportData" style="background:linear-gradient(135deg,#0984e3,#0770c2);">📤 Restore Data</button>
                 </div>
 
                 <!-- DANGER ZONE -->
