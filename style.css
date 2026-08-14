@@ -499,6 +499,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    flex-shrink: 0;
 }
 
 .cart-item-img img {
@@ -510,11 +511,15 @@ body {
 
 .cart-item-info {
     flex: 1;
+    min-width: 0;
 }
 
 .cart-item-name {
     font-size: 13px;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cart-item-price {
@@ -556,6 +561,7 @@ body {
     color: var(--danger);
     font-size: 18px;
     cursor: pointer;
+    padding: 4px;
 }
 
 .cart-footer {
@@ -704,6 +710,7 @@ body {
 .admin-section input[type="file"] {
     padding: 8px;
     font-size: 13px;
+    width: 100%;
 }
 
 #adminLogin {
@@ -859,6 +866,7 @@ body {
     font-size: 20px;
     cursor: pointer;
     padding: 4px;
+    flex-shrink: 0;
 }
 
 /* ===== MODAL DETAIL ===== */
@@ -900,6 +908,8 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
 .modal-image {
@@ -934,6 +944,7 @@ body {
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 12px;
+    align-items: center;
 }
 
 .modal-price {
@@ -949,7 +960,6 @@ body {
     color: #2e7d32;
     border-radius: 20px;
     font-weight: 600;
-    align-self: center;
 }
 
 .modal-category {
@@ -959,7 +969,6 @@ body {
     color: var(--primary);
     border-radius: 20px;
     font-weight: 600;
-    align-self: center;
 }
 
 .modal-desc {
@@ -1027,6 +1036,7 @@ body {
     transition: all 0.4s ease;
     white-space: nowrap;
     box-shadow: var(--shadow-lg);
+    pointer-events: none;
 }
 
 .toast.show {
@@ -1071,7 +1081,6 @@ body {
     border-radius: 4px;
 }
 
-/* ===== SELECTION ===== */
 ::selection {
     background: var(--primary-light);
     color: white;
