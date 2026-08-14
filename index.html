@@ -1,257 +1,238 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Toko Bekas Premium | Barang Bekas Berkualitas</title>
-  
-  <!-- SEO & Social Media Preview -->
-  <meta name="description" content="Toko barang bekas berkualitas dengan harga bersahabat. Elektronik, fashion, furniture, dan lainnya.">
-  <meta property="og:title" content="Toko Bekas Premium">
-  <meta property="og:description" content="Barang bekas berkualitas, harga bersahabat. Lihat katalog sekarang!">
-  <meta property="og:image" content="https://via.placeholder.com/1200x630/6c5ce7/ffffff?text=Toko+Bekas+Premium">
-  <meta property="og:url" content="https://supriadi47700-hub.github.io/toko-bekas/">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#6c5ce7">
-  
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="apple-touch-icon" href="https://via.placeholder.com/192">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adi Store - Toko Bekas Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description" content="Toko barang bekas berkualitas, harga bersahabat">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="logo-area">
+                <img id="logoImg" src="" alt="Logo" class="logo-img" style="display:none;">
+                <span class="logo-emoji" id="logoEmoji">🏪</span>
+                <div>
+                    <h1 class="store-name" id="storeName">Adi Store</h1>
+                    <p class="store-tagline" id="storeTagline">Barang bekas berkualitas</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="btnSearch" title="Cari">🔍</button>
+                <button class="btn-icon" id="btnCart" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+                <button class="btn-icon" id="btnAdmin" title="Admin">⚙️</button>
+            </div>
+        </div>
+    </header>
 
-<!-- ===== LOGIN SCREEN ===== -->
-<div id="loginScreen" class="modal-overlay active login-screen">
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-logo">🏪</div>
-      <h1 class="login-title">Toko Bekas<br><span>Premium</span></h1>
-      <p class="login-sub">Barang bekas berkualitas, harga bersahabat</p>
-      
-      <button class="btn-login-viewer" onclick="enterAsViewer()">
-        <span class="btn-icon-lg">👁️</span>
-        <span>Masuk sebagai Pembeli</span>
-      </button>
-      
-      <div class="login-divider"><span>atau masuk sebagai admin</span></div>
-      
-      <div class="login-admin-row">
-        <input type="password" id="adminPass" placeholder="Masukkan password admin" 
-               onkeydown="if(event.key==='Enter')enterAsAdmin()">
-        <button class="btn-admin-go" onclick="enterAsAdmin()">→</button>
-      </div>
-      <p id="loginError" class="login-error">❌ Password salah! Coba lagi.</p>
-      
-      <p class="login-footer">v2.0 • Toko Bekas Premium</p>
+    <!-- SEARCH BAR -->
+    <div class="search-bar" id="searchBar" style="display:none;">
+        <input type="text" id="searchInput" placeholder="Cari barang..." autocomplete="off">
+        <button class="btn-close-search" id="btnCloseSearch">✕</button>
     </div>
-  </div>
-</div>
 
-<!-- ===== HEADER ===== -->
-<header id="storeHeader">
-  <div class="header-bg-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-  </div>
-  <div class="header-content">
-    <div class="logo-wrap admin-only" id="logoWrap" onclick="document.getElementById('logoInput').click()">
-      <img id="storeLogo" src="" alt="Logo" class="store-logo" style="display:none;">
-      <span id="logoPlaceholder" class="logo-placeholder">📷</span>
+    <!-- KATEGORI FILTER -->
+    <div class="category-filter" id="categoryFilter">
+        <button class="cat-btn active" data-cat="semua">Semua</button>
+        <button class="cat-btn" data-cat="elektronik">📱 Elektronik</button>
+        <button class="cat-btn" data-cat="fashion">👕 Fashion</button>
+        <button class="cat-btn" data-cat="furniture">🪑 Furniture</button>
+        <button class="cat-btn" data-cat="buku">📚 Buku</button>
+        <button class="cat-btn" data-cat="olahraga">⚽ Olahraga</button>
+        <button class="cat-btn" data-cat="lainnya">📦 Lainnya</button>
     </div>
-    <div class="logo-wrap viewer-logo" id="viewerLogoWrap" style="display:none;">
-      <img id="viewerLogo" src="" alt="Logo" class="store-logo" style="display:none;">
-      <span id="viewerLogoPlaceholder" class="logo-placeholder">🏪</span>
-    </div>
-    <div class="header-text">
-      <h1 id="storeName">Toko Bekas Premium</h1>
-      <p id="storeTagline">Barang bekas berkualitas, harga bersahabat</p>
-    </div>
-    <button class="btn-icon btn-edit-header admin-only" onclick="openHeaderModal()" title="Edit Header">⚙️</button>
-  </div>
-  <input type="file" id="logoInput" accept="image/*" style="display:none;">
-</header>
 
-<!-- ===== TOOLBAR ===== -->
-<div class="toolbar">
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Cari barang impianmu..." oninput="renderProducts()">
-    <span class="search-icon">🔍</span>
-  </div>
-  <div class="toolbar-actions admin-only">
-    <button class="btn-tool" onclick="exportData()" title="Backup Data">💾</button>
-    <button class="btn-tool" onclick="document.getElementById('importFile').click()" title="Restore Data">📂</button>
-    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(this)">
-    <button class="btn-tool btn-logout" onclick="logout()" title="Logout">🚪</button>
-  </div>
-</div>
+    <!-- BANNER PROMO -->
+    <div class="promo-banner" id="promoBanner">
+        <div class="promo-slide active">
+            <span class="promo-icon">🔥</span>
+            <span>Barang bekas berkualitas, harga bersahabat!</span>
+        </div>
+        <div class="promo-slide">
+            <span class="promo-icon">💰</span>
+            <span>Hemat hingga 70% dari harga baru!</span>
+        </div>
+        <div class="promo-slide">
+            <span class="promo-icon">♻️</span>
+            <span>Beli bekas = ramah lingkungan!</span>
+        </div>
+    </div>
 
-<!-- ===== STATS (Admin Only) ===== -->
-<div class="stats-row admin-only">
-  <div class="stat-card">
-    <div class="stat-icon">📦</div>
-    <span class="stat-num" id="totalItems">0</span>
-    <span class="stat-label">Total Barang</span>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon">💰</div>
-    <span class="stat-num" id="totalValue">Rp 0</span>
-    <span class="stat-label">Total Nilai</span>
-  </div>
-</div>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- STATS -->
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-item">
+                <span class="stat-num" id="totalItems">0</span>
+                <span class="stat-label">Barang</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num" id="totalCategories">0</span>
+                <span class="stat-label">Kategori</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num" id="priceRange">-</span>
+                <span class="stat-label">Harga Mulai</span>
+            </div>
+        </div>
 
-<!-- ===== FORM TAMBAH / EDIT (Admin Only) ===== -->
-<div class="form-section admin-only">
-  <div class="form-header">
-    <h2 id="formTitle">➕ Tambah Barang Baru</h2>
-    <button class="btn-toggle-form" id="btnToggleForm" onclick="toggleForm()">▼</button>
-  </div>
-  <form id="productForm" class="product-form">
-    <input type="hidden" id="editId" value="">
-    
-    <div class="photo-upload-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
-      <img id="photoPreview" src="" alt="Preview" style="display:none;">
-      <div id="photoPlaceholder" class="photo-placeholder">
-        <span>📸</span>
-        <p>Tap untuk upload foto barang</p>
-        <small>JPG/PNG, maks 2MB</small>
-      </div>
-    </div>
-    <input type="file" id="photoInput" accept="image/*" style="display:none;">
-    
-    <div class="form-grid">
-      <div class="form-group">
-        <label>📝 Nama Barang</label>
-        <input type="text" id="namaBarang" placeholder="Contoh: Sepatu Nike Air Max" required>
-      </div>
-      <div class="form-group">
-        <label>💲 Harga (Rp)</label>
-        <input type="number" id="harga" placeholder="150000" required>
-      </div>
-      <div class="form-group">
-        <label>✨ Kondisi</label>
-        <select id="kondisi">
-          <option value="Seperti Baru">✨ Seperti Baru</option>
-          <option value="Layak Pakai">👍 Layak Pakai</option>
-          <option value="Ada Lecet">⚠️ Ada Lecet Halus</option>
-          <option value="Perlu Perbaikan">🔧 Perlu Perbaikan</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>📁 Kategori</label>
-        <select id="kategori">
-          <option value="Elektronik">📱 Elektronik</option>
-          <option value="Fashion">👕 Fashion</option>
-          <option value="Furniture">🪑 Furniture</option>
-          <option value="Buku">📚 Buku</option>
-          <option value="Mainan">🧸 Mainan</option>
-          <option value="Olahraga">⚽ Olahraga</option>
-          <option value="Lainnya">📦 Lainnya</option>
-        </select>
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label>📄 Deskripsi</label>
-      <textarea id="deskripsi" rows="3" placeholder="Jelaskan kondisi detail, kelengkapan, alasan jual..."></textarea>
-    </div>
-    
-    <div class="form-actions">
-      <button type="submit" class="btn-primary" id="btnSimpan">💾 Simpan Barang</button>
-      <button type="button" class="btn-cancel" id="btnBatal" style="display:none;" onclick="resetForm()">✖ Batal</button>
-    </div>
-  </form>
-</div>
+        <!-- SORT -->
+        <div class="sort-bar">
+            <span class="sort-label">Urutkan:</span>
+            <select id="sortSelect">
+                <option value="terbaru">Terbaru</option>
+                <option value="termurah">Termurah</option>
+                <option value="termahal">Termahal</option>
+                <option value="nama">Nama A-Z</option>
+            </select>
+        </div>
 
-<!-- ===== FILTER KATEGORI (Viewer + Admin) ===== -->
-<div class="filter-section">
-  <div class="filter-scroll" id="filterScroll">
-    <button class="filter-btn active" data-filter="all" onclick="filterCategory('all', this)">Semua</button>
-    <button class="filter-btn" data-filter="Elektronik" onclick="filterCategory('Elektronik', this)">📱 Elektronik</button>
-    <button class="filter-btn" data-filter="Fashion" onclick="filterCategory('Fashion', this)">👕 Fashion</button>
-    <button class="filter-btn" data-filter="Furniture" onclick="filterCategory('Furniture', this)">🪑 Furniture</button>
-    <button class="filter-btn" data-filter="Buku" onclick="filterCategory('Buku', this)">📚 Buku</button>
-    <button class="filter-btn" data-filter="Mainan" onclick="filterCategory('Mainan', this)">🧸 Mainan</button>
-    <button class="filter-btn" data-filter="Olahraga" onclick="filterCategory('Olahraga', this)">⚽ Olahraga</button>
-    <button class="filter-btn" data-filter="Lainnya" onclick="filterCategory('Lainnya', this)">📦 Lainnya</button>
-  </div>
-</div>
+        <!-- PRODUCT GRID -->
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be rendered here -->
+        </div>
 
-<!-- ===== DAFTAR BARANG ===== -->
-<div class="products-section">
-  <div class="section-header">
-    <h2 class="section-title">🏷️ Katalog Barang</h2>
-    <span class="item-count" id="itemCount">0 barang</span>
-  </div>
-  <div class="products-grid" id="daftarBarang"></div>
-</div>
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="empty-icon">📦</span>
+            <h3>Belum ada barang</h3>
+            <p>Klik ⚙️ untuk login admin dan tambah barang pertama Anda!</p>
+        </div>
+    </main>
 
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-  <p>© 2025 Toko Bekas Premium • Dibuat dengan ❤️</p>
-</footer>
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" style="display:none;"></div>
+    <div class="cart-sidebar" id="cartSidebar" style="display:none;">
+        <div class="cart-header">
+            <h2>🛒 Keranjang</h2>
+            <button class="btn-close-cart" id="btnCloseCart">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rp 0</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout">💬 Checkout via WhatsApp</button>
+            <button class="btn-clear-cart" id="btnClearCart">🗑️ Kosongkan Keranjang</button>
+        </div>
+    </div>
 
-<!-- ===== MODAL EDIT HEADER ===== -->
-<div class="modal-overlay" id="headerModal">
-  <div class="modal-content">
-    <button class="btn-close-modal" onclick="closeModal('headerModal')">✕</button>
-    <h2>⚙️ Pengaturan Toko</h2>
-    
-    <div class="form-group">
-      <label>🏪 Nama Toko</label>
-      <input type="text" id="inputStoreName" placeholder="Nama toko Anda">
-    </div>
-    <div class="form-group">
-      <label>💬 Tagline</label>
-      <input type="text" id="inputTagline" placeholder="Slogan toko">
-    </div>
-    <div class="form-group">
-      <label>📱 Nomor WhatsApp</label>
-      <input type="tel" id="inputWA" placeholder="628xxxxxxxxxx (format internasional)">
-      <small style="color:var(--text-dim);font-size:11px;">Pembeli bisa langsung chat via WA</small>
-    </div>
-    <div class="form-group">
-      <label>🔑 Password Admin Baru</label>
-      <input type="password" id="inputNewPass" placeholder="Kosongkan jika tidak diubah">
-    </div>
-    <div class="form-group">
-      <label>🎨 Warna Tema Header</label>
-      <div class="color-options">
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#6c5ce7,#a29bfe)" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#00b894,#00cec9)" style="background:linear-gradient(135deg,#00b894,#00cec9)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#e17055,#fdcb6e)" style="background:linear-gradient(135deg,#e17055,#fdcb6e)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#0984e3,#74b9ff)" style="background:linear-gradient(135deg,#0984e3,#74b9ff)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#2d3436,#636e72)" style="background:linear-gradient(135deg,#2d3436,#636e72)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#e84393,#fd79a8)" style="background:linear-gradient(135deg,#e84393,#fd79a8)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#f39c12,#e74c3c)" style="background:linear-gradient(135deg,#f39c12,#e74c3c)"></button>
-        <button type="button" class="color-btn" data-color="linear-gradient(135deg,#1abc9c,#16a085)" style="background:linear-gradient(135deg,#1abc9c,#16a085)"></button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>🖼️ Logo Toko</label>
-      <button type="button" class="btn-secondary" onclick="document.getElementById('logoInput').click()">📷 Upload Logo Baru</button>
-      <button type="button" class="btn-secondary btn-remove-logo" onclick="removeLogo()">🗑️ Hapus Logo</button>
-    </div>
-    
-    <div class="form-actions">
-      <button type="button" class="btn-primary" onclick="saveHeader()">✅ Simpan Pengaturan</button>
-      <button type="button" class="btn-cancel" onclick="closeModal('headerModal')">✖ Tutup</button>
-    </div>
-  </div>
-</div>
+    <!-- ADMIN PANEL -->
+    <div class="admin-overlay" id="adminOverlay" style="display:none;"></div>
+    <div class="admin-panel" id="adminPanel" style="display:none;">
+        <div class="admin-header">
+            <h2>⚙️ Panel Admin</h2>
+            <button class="btn-close-admin" id="btnCloseAdmin">✕</button>
+        </div>
+        <div class="admin-body">
+            <!-- LOGIN -->
+            <div id="adminLogin">
+                <h3>🔐 Login Admin</h3>
+                <input type="password" id="adminPassword" placeholder="Masukkan password admin">
+                <button class="btn-login" id="btnLogin">Masuk</button>
+                <p class="login-hint">Default: admin123</p>
+            </div>
 
-<!-- ===== MODAL DETAIL BARANG ===== -->
-<div class="modal-overlay" id="detailModal">
-  <div class="modal-content modal-detail">
-    <button class="btn-close-modal" onclick="closeModal('detailModal')">✕</button>
-    <div id="detailContent"></div>
-  </div>
-</div>
+            <!-- ADMIN CONTENT (hidden until logged in) -->
+            <div id="adminContent" style="display:none;">
+                <!-- STORE SETTINGS -->
+                <div class="admin-section">
+                    <h3>🏪 Pengaturan Toko</h3>
+                    <label>Nama Toko</label>
+                    <input type="text" id="settingName" placeholder="Adi Store">
+                    <label>Tagline</label>
+                    <input type="text" id="settingTagline" placeholder="Barang bekas berkualitas">
+                    <label>Nomor WhatsApp (format: 628xxx)</label>
+                    <input type="text" id="settingWA" placeholder="6281234567890">
+                    <label>Password Admin Baru</label>
+                    <input type="password" id="settingPassword" placeholder="Kosongkan jika tidak diubah">
+                    <label>🖼️ Logo Toko</label>
+                    <input type="file" id="settingLogo" accept="image/*">
+                    <img id="logoPreview" src="" alt="" style="display:none; max-width:100px; margin-top:8px; border-radius:8px;">
+                    <button class="btn-save-settings" id="btnSaveSettings">✅ Simpan Pengaturan</button>
+                </div>
 
-<!-- ===== TOAST ===== -->
-<div id="toast" class="toast"></div>
+                <!-- ADD PRODUCT -->
+                <div class="admin-section">
+                    <h3>➕ Tambah Barang Baru</h3>
+                    <label>Nama Barang</label>
+                    <input type="text" id="prodName" placeholder="Contoh: iPhone 11 Bekas">
+                    <label>Harga (Rp)</label>
+                    <input type="number" id="prodPrice" placeholder="Contoh: 2500000">
+                    <label>Kategori</label>
+                    <select id="prodCategory">
+                        <option value="elektronik">📱 Elektronik</option>
+                        <option value="fashion">👕 Fashion</option>
+                        <option value="furniture">🪑 Furniture</option>
+                        <option value="buku">📚 Buku</option>
+                        <option value="olahraga">⚽ Olahraga</option>
+                        <option value="lainnya">📦 Lainnya</option>
+                    </select>
+                    <label>Kondisi</label>
+                    <select id="prodCondition">
+                        <option value="seperti baru">Seperti Baru</option>
+                        <option value="sangat baik">Sangat Baik</option>
+                        <option value="baik">Baik</option>
+                        <option value="cukup">Cukup</option>
+                    </select>
+                    <label>Deskripsi</label>
+                    <textarea id="prodDesc" rows="3" placeholder="Deskripsi singkat barang..."></textarea>
+                    <label>📷 Foto Barang</label>
+                    <input type="file" id="prodImage" accept="image/*">
+                    <img id="imagePreview" src="" alt="" style="display:none; max-width:150px; margin-top:8px; border-radius:8px;">
+                    <button class="btn-add-product" id="btnAddProduct">➕ Tambah Barang</button>
+                </div>
 
-<script src="app.js"></script>
+                <!-- MANAGE PRODUCTS -->
+                <div class="admin-section">
+                    <h3>📋 Kelola Barang (<span id="adminItemCount">0</span>)</h3>
+                    <div id="adminProductList"></div>
+                </div>
+
+                <!-- DANGER ZONE -->
+                <div class="admin-section danger-zone">
+                    <h3>⚠️ Zona Berbahaya</h3>
+                    <button class="btn-danger" id="btnResetAll">🗑️ Hapus Semua Data</button>
+                    <button class="btn-logout" id="btnLogout">🚪 Logout Admin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div class="modal-overlay" id="modalOverlay" style="display:none;"></div>
+    <div class="modal-detail" id="modalDetail" style="display:none;">
+        <button class="btn-close-modal" id="btnCloseModal">✕</button>
+        <div class="modal-image" id="modalImage"></div>
+        <div class="modal-info">
+            <h2 id="modalName"></h2>
+            <div class="modal-meta">
+                <span class="modal-price" id="modalPrice"></span>
+                <span class="modal-condition" id="modalCondition"></span>
+                <span class="modal-category" id="modalCategory"></span>
+            </div>
+            <p class="modal-desc" id="modalDesc"></p>
+            <div class="modal-date" id="modalDate"></div>
+            <button class="btn-add-cart" id="btnAddCart">🛒 Tambah ke Keranjang</button>
+            <button class="btn-wa-direct" id="btnWADirect">💬 Tanya via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 Adi Store — Barang Bekas Berkualitas 💜</p>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
+
