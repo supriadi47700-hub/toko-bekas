@@ -53,6 +53,12 @@
         <div class="promo-slide"><span class="promo-icon">♻️</span><span>Beli bekas = ramah lingkungan!</span></div>
     </div>
 
+    <!-- SYNC STATUS -->
+    <div class="sync-status" id="syncStatus">
+        <span class="sync-dot" id="syncDot"></span>
+        <span id="syncText">Menghubungkan ke cloud...</span>
+    </div>
+
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <div class="stats-bar">
@@ -155,17 +161,9 @@
                     <h3>📋 Kelola Barang (<span id="adminItemCount">0</span>)</h3>
                     <div id="adminProductList"></div>
                 </div>
-                <div class="admin-section" style="border:2px solid #00b894;">
-                    <h3>💾 Backup &amp; Restore Data</h3>
-                    <p style="font-size:12px;color:#636e72;margin-bottom:12px;line-height:1.5;">⚠️ Data tersimpan di browser ini saja. Download backup supaya data aman!</p>
-                    <button class="btn-save-settings" id="btnExportData" style="background:linear-gradient(135deg,#00b894,#00a381);margin-top:0;">📥 Download Backup (.json)</button>
-                    <label style="margin-top:14px;">📤 Restore dari File Backup</label>
-                    <input type="file" id="importFile" accept=".json" style="margin-top:4px;padding:8px;font-size:13px;">
-                    <button class="btn-save-settings" id="btnImportData" style="background:linear-gradient(135deg,#0984e3,#0770c2);">📤 Restore Data</button>
-                </div>
                 <div class="admin-section danger-zone">
                     <h3>⚠️ Zona Berbahaya</h3>
-                    <button class="btn-danger" id="btnResetAll">🗑️ Hapus Semua Data</button>
+                    <button class="btn-danger" id="btnResetAll">🗑️ Hapus Semua Data di Cloud</button>
                     <button class="btn-logout" id="btnLogout">🚪 Logout Admin</button>
                 </div>
             </div>
@@ -196,10 +194,12 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p>&copy; 2025 Adi Store — Barang Bekas Berkualitas 💜</p>
+        <p>&copy; 2025 Adi Store — Barang Bekas Berkualitas 💜 | ☁️ Cloud Sync</p>
     </footer>
 
+    <!-- FIREBASE SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
-
